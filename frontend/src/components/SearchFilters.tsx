@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { FilterRow, SearchInput, SearchButton, ClearButton } from './components'
 import { I18N } from '../constants/i18n'
-import { Filters, PaymentSearchQuery } from '../types/payment'
+import { PaymentSearchQuery } from '../types/payment'
 import { CURRENCIES as currencyOptions } from '../constants'
 import { SelectComponent } from './Select'
 
@@ -27,6 +27,7 @@ export const SearchFilters = ({
       updateQuery({ ...query, filters: { ...filters, ...patch } }),
     [query, filters, updateQuery],
   )
+
   return (
     <FilterRow>
       <SearchInput

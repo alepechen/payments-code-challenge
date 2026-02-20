@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Container, ErrorBox } from './components'
 import { PaymentTable } from './PaymentTable'
 import { SearchFilters } from './SearchFilters'
