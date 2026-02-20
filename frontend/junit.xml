@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="11" failures="0" errors="0" time="0.118731041">
+    <testsuite name="src/App.test.tsx" timestamp="2026-02-19T21:45:21.109Z" hostname="Aleksandras-MacBook-Pro.local" tests="11" failures="0" errors="0" skipped="9" time="0.118731041">
+        <testcase classname="src/App.test.tsx" name="App - Step 1: Basic Payment List &gt; should fetch and display payments in a table with page=1 and pageSize=5" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 2: Search by Payment ID &gt; should have a search input for payment ID" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 2: Search by Payment ID &gt; should search for payments by payment ID" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 3: Clear Filters &gt; should clear all filters when clear button is clicked" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 4: Handle Payment Not Found &gt; should display error message when payment ID is not found" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 5: Handle Server Error &gt; should display error message when API returns 500" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 6: Currency Filter &gt; should have a currency filter dropdown" time="0.071981792">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 6: Currency Filter &gt; should filter payments by currency when selected" time="0.044500666">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 7: Combined Currency and Payment ID Filter &gt; should filter by both currency and payment ID" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 8: Pagination &gt; should display pagination controls" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="App - Step 8: Pagination &gt; should disable previous button on first page" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+</testsuites>
