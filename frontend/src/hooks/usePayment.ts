@@ -31,7 +31,7 @@ export const usePayments = (): PaymentData => {
   const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
   const [query, setQuery] = useState<PaymentSearchQuery>(initialQuery)
-  //const updateQuery = (newQuery: PaymentSearchQuery) => setQuery(newQuery)
+
   const fetchPayments = (query: PaymentSearchQuery) => {
     startTransition(async () => {
       try {
