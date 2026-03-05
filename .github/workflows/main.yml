@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:   # optional manual run
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: payment-gateway-challenge   # your subfolder
+
+    steps:
+      # 1️⃣ Checkout repository
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Setup Java with Gradle cache
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle   # caches Gradle dependencies
+
+      # 3️⃣ Make Gradle wrapper executable
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      # 4️⃣ Build the project and run tests
+      - name: Build and run tests
+        run: ./gradlew clean test build
