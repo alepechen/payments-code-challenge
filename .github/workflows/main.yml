@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:   # allows manual runs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: payment-gateway-challenge   # set subfolder
+
+    steps:
+      # 1️⃣ Checkout the repository
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Setup Java
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      # 3️⃣ Make Gradle wrapper executable
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      # 4️⃣ Build the project and run tests
+      - name: Build and run tests
+        run: ./gradlew clean test build
+        continue-on-error: false  # fail the job if tests fail
+
+      # 5️⃣ Publish test results to GitHub Actions UI
+      - name: Publish test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: build/test-results/test
+
+      - name: Show summary of test results
+        if: always()
+        run: |
+          echo "JUnit test results:"
+          ls -l build/test-results/test
