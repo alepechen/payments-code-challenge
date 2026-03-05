@@ -3,6 +3,7 @@ package com.checkout.payment.gateway.exception;
 import com.checkout.payment.gateway.model.ErrorResponse;
 import java.util.HashMap;
 import java.util.Map;
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,12 @@ public class CommonExceptionHandler {
   @ExceptionHandler(BankServiceUnavailableException.class)
   public ResponseEntity<String> handleBankUnavailable(BankServiceUnavailableException e) {
     return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(e.getMessage());
+  }
+
+  @ExceptionHandler(CallNotPermittedException.class)
+  public ResponseEntity<?> handleCircuitOpen(CallNotPermittedException e) {
+    return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+        .body(new ErrorResponse("Bank service unavailable"));
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

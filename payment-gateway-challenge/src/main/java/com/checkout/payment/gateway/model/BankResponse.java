@@ -9,6 +9,11 @@ public class BankResponse {
   @JsonProperty("authorization_code")
   private String authorizationCode;
 
+  public BankResponse(boolean authorized, String authorizationCode) {
+    this.authorized = authorized;
+    this.authorizationCode= authorizationCode;
+  }
+
   public boolean isAuthorized() {
     return authorized;
   }
