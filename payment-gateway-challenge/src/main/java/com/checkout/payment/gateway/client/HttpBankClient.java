@@ -8,6 +8,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,9 +24,11 @@ import org.springframework.web.client.RestTemplate;
 public class HttpBankClient implements BankClient {
   private static final Logger LOG = LoggerFactory.getLogger(HttpBankClient.class);
   private final RestTemplate restTemplate;
+  private final String bankBaseUrl;
 
-  public HttpBankClient(RestTemplate restTemplate) {
+  public HttpBankClient(RestTemplate restTemplate,@Value("${bank.base-url}") String bankBaseUrl) {
     this.restTemplate = restTemplate;
+    this.bankBaseUrl = bankBaseUrl;
   }
 
   @Retry(name = "bankRetry")
@@ -34,10 +37,10 @@ public class HttpBankClient implements BankClient {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<PostPaymentRequest> httpEntity = new HttpEntity<>(request, headers);
-
     try {
       ResponseEntity<BankResponse> response = restTemplate.exchange(
-          "http://localhost:8080/payments", HttpMethod.POST, httpEntity, BankResponse.class);
+          bankBaseUrl + "/payments", HttpMethod.POST, httpEntity, BankResponse.class);
+
       return response.getBody();
     } catch (HttpClientErrorException.BadRequest e) {
       // client error — don't retry
